@@ -82,7 +82,7 @@ export const MapViewer: React.FC<MapViewerProps> = ({
   const [showLayerMenu, setShowLayerMenu] = useState(false);
   const [showTypeToggles, setShowTypeToggles] = useState(false);
 
-  // Initialize Map
+  // Initialize Map & Watch Container Resize
   useEffect(() => {
     if (!mapContainerRef.current || mapInstanceRef.current) return;
 
@@ -107,7 +107,23 @@ export const MapViewer: React.FC<MapViewerProps> = ({
     featureLayersGroupRef.current = featureGroup;
     mapInstanceRef.current = map;
 
+    // Recalcula o tamanho do mapa após montagem
+    const timer = setTimeout(() => {
+      map.invalidateSize();
+    }, 200);
+
+    // Observa mudanças de dimensão da tela/container para recalcular o mapa automaticamente
+    const resizeObserver = new ResizeObserver(() => {
+      map.invalidateSize();
+    });
+
+    if (mapContainerRef.current) {
+      resizeObserver.observe(mapContainerRef.current);
+    }
+
     return () => {
+      clearTimeout(timer);
+      resizeObserver.disconnect();
       map.remove();
       mapInstanceRef.current = null;
     };
