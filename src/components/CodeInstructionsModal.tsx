@@ -24,7 +24,7 @@ export const CodeInstructionsModal: React.FC<CodeInstructionsModalProps> = ({
 import { useEffect, useState } from 'react';
 import JSZip from 'jszip';
 
-export function useKmzReader(url = '/dados.kmz') {
+export function usekmzreader(url = '/dados.kmz') {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
