@@ -6,7 +6,7 @@ import {
   normalizar,
   haversineDistance,
   haversineDistanceMeters,
-} from '../utils/kmzreader';
+} from '../utils/kmzReader';
 import {
   Search,
   MapPin,
@@ -62,7 +62,6 @@ export const TelecomPanel: React.FC<TelecomPanelProps> = ({
   // ----------------------------------------------------
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState<string>('Todas as Cidades/Bairro Rural');
-  const [filterCategory, setFilterCategory] = useState<'all' | 'cto' | 'ce' | 'splitter'>('all');
   const [copiedSingleCoords, setCopiedSingleCoords] = useState(false);
   const [copiedCoordsId, setCopiedCoordsId] = useState<string | null>(null);
 
@@ -154,26 +153,6 @@ export const TelecomPanel: React.FC<TelecomPanelProps> = ({
         if (cidadeFeat !== selectedCity) return false;
       }
 
-      // Filtro de Categoria (opcional para refinar CTOs)
-      if (filterCategory === 'cto') {
-        const isCto =
-          f.name.toLowerCase().includes('cto') ||
-          f.description.toLowerCase().includes('cto') ||
-          f.folder.toLowerCase().includes('cto');
-        if (!isCto && f.geometryType !== 'Point') return false;
-      } else if (filterCategory === 'ce') {
-        const isCe =
-          f.name.toLowerCase().includes('ce') ||
-          f.name.toLowerCase().includes('emenda') ||
-          f.description.toLowerCase().includes('emenda');
-        if (!isCe) return false;
-      } else if (filterCategory === 'splitter') {
-        const isSplitter =
-          f.name.toLowerCase().includes('split') ||
-          f.description.toLowerCase().includes('split');
-        if (!isSplitter) return false;
-      }
-
       // Busca por termo (nome da CTO normalizado)
       if (searchTerm.trim()) {
         const normTerm = normalizar(searchTerm);
@@ -191,7 +170,7 @@ export const TelecomPanel: React.FC<TelecomPanelProps> = ({
 
       return true;
     });
-  }, [features, selectedCity, searchTerm, filterCategory]);
+  }, [features, selectedCity, searchTerm]);
 
   // ----------------------------------------------------
   // MODO 2: COORDENADAS ATIVAS (GPS OU MANUAL)
@@ -395,29 +374,6 @@ export const TelecomPanel: React.FC<TelecomPanelProps> = ({
                   </button>
                 )}
               </div>
-            </div>
-
-            {/* Filter Category Chips */}
-            <div className="flex gap-1.5 overflow-x-auto text-[11px] pb-0.5">
-              {[
-                { id: 'all', label: 'Todos' },
-                { id: 'cto', label: 'Apenas CTOs' },
-                { id: 'ce', label: 'Caixas Emenda' },
-                { id: 'splitter', label: 'Splitters' },
-              ].map((chip) => (
-                <button
-                  key={chip.id}
-                  type="button"
-                  onClick={() => setFilterCategory(chip.id as any)}
-                  className={`px-2.5 py-1 rounded-md font-semibold whitespace-nowrap transition ${
-                    filterCategory === chip.id
-                      ? 'bg-[#00a86b] text-white shadow-sm'
-                      : 'bg-[#0e1117] text-slate-400 border border-[#31333f] hover:text-slate-200 hover:bg-[#262730]'
-                  }`}
-                >
-                  {chip.label}
-                </button>
-              ))}
             </div>
           </div>
 
