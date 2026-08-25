@@ -1,5 +1,5 @@
 import { get, set, del } from 'idb-keyval';
-import { parseKmzOrKmlBuffer, loadKmzFromPublic } from './kmzReader';
+import { parseKmzOrKmlBuffer, loadKmzFromPublic } from './kmzreader';
 import { KmzParseResult } from '../types/kmz';
 
 const KMZ_STORAGE_KEY = 'visualizador_kmz_uploaded_file';
@@ -14,7 +14,7 @@ export interface StoredKmzFile {
 /**
  * Saves a KMZ or KML ArrayBuffer to IndexedDB so it persists across page refreshes
  */
-export async function saveKmzToStorage(fileName: string, buffer: ArrayBuffer): Promise<void> {
+export async function savekmzTostorage(fileName: string, buffer: ArrayBuffer): Promise<void> {
   const data: StoredKmzFile = {
     fileName,
     buffer,
