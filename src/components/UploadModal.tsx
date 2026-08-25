@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Upload, X, FileText, CheckCircle2, AlertCircle, Save, Code } from 'lucide-react';
 import { parseKmzOrKmlBuffer } from '../utils/kmzreader';
-import { saveKmzToStorage } from '../utils/kmzstorage';
+import { savekmzTostorage } from '../utils/kmzstorage';
 import { KmzParseResult } from '../types/kmz';
 
 interface UploadModalProps {
@@ -44,7 +44,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
         setError(result.error || 'Falha ao processar o arquivo.');
       } else {
         // Persist file into IndexedDB so it stays fixed after page reload!
-        await saveKmzToStorage(file.name, buffer);
+        await savekmzTostorage(file.name, buffer);
         onLoaded(result, 'indexeddb');
         onClose();
       }
@@ -73,7 +73,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
         setError(result.error || 'Falha ao interpretar o texto KML.');
       } else {
         // Persist to IndexedDB
-        await saveKmzToStorage(fileName, buffer);
+        await savekmzTostorage(fileName, buffer);
         onLoaded(result, 'indexeddb');
         onClose();
       }
