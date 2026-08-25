@@ -1,0 +1,6 @@
+{
+  "name": "Busca CTO SBS",
+  "description": "Sistema de busca de CTOs de fibra óptica, localização da CTO mais próxima via GPS do técnico e solicitação de ativação/remoção com envio direto para WhatsApp.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
