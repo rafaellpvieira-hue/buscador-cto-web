@@ -6,7 +6,7 @@ import {
   normalizar,
   haversineDistance,
   haversineDistanceMeters,
-} from '../utils/kmzReader';
+} from '../utils/kmzreader';
 import {
   Search,
   MapPin,
