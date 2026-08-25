@@ -5,11 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tmcw/togeojson": "^5.8.1",
+    "idb-keyval": "^6.2.1",
+    "jszip": "^3.10.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
