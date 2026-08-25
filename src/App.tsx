@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { loadPersistentKmz, clearStoredKmz } from './utils/kmzStorage';
+import { loadPersistentKmz, clearStoredKmz } from './utils/kmzstorage';
 import { KmzFeature, KmzMetadata, KmzParseResult } from './types/kmz';
 import { Header } from './components/Header';
 import { TelecomTopBar, TelecomTab } from './components/TelecomTopBar';
@@ -14,7 +14,7 @@ import { FeatureTableView } from './components/FeatureTableView';
 import { FeatureDetailView } from './components/FeatureDetailView';
 import { UploadModal } from './components/UploadModal';
 import { CodeInstructionsModal } from './components/CodeInstructionsModal';
-import { haversineDistance } from './utils/kmzReader';
+import { haversineDistance } from './utils/kmzreader';
 import {
   MapPin,
   Navigation,
