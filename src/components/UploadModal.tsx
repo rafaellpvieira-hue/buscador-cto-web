@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Upload, X, FileText, CheckCircle2, AlertCircle, Save, Code } from 'lucide-react';
-import { parseKmzOrKmlBuffer } from '../utils/kmzReader';
-import { saveKmzToStorage } from '../utils/kmzStorage';
+import { parseKmzOrKmlBuffer } from '../utils/kmzreader';
+import { saveKmzToStorage } from '../utils/kmzstorage';
 import { KmzParseResult } from '../types/kmz';
 
 interface UploadModalProps {
